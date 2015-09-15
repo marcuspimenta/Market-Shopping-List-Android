@@ -63,5 +63,4 @@ public class SplashActivity extends Activity implements IActivity{
         splashImageView.startAnimation(animation);
     }
 
-
 }

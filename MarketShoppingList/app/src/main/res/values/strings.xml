@@ -4,4 +4,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_splash">SplashActivity</string>
+
+    <string-array name="menu_array">
+        <item>Categories</item>
+        <item>Stores</item>
+        <item>Spending</item>
+        <item>About</item>
+    </string-array>
 </resources>
