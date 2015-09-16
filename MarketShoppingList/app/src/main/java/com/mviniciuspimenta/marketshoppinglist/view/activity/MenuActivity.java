@@ -36,7 +36,7 @@ public class MenuActivity extends AppCompatActivity implements IActivity{
 
     @Override
     public void settingsAttributes() {
-
+        
     }
 
     @Override
