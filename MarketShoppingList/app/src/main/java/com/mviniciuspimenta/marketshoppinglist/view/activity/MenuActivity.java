@@ -6,11 +6,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.mviniciuspimenta.marketshoppinglist.R;
+import com.mviniciuspimenta.marketshoppinglist.view.fragment.CategoriesFragment;
 
 /**
  * @author Marcus Pimenta
@@ -25,6 +29,9 @@ public class MenuActivity extends AppCompatActivity implements IActivity{
 
     private ListView menuListView;
 
+    private ImageView logoImageView;
+    private CategoriesFragment categoriesFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +43,14 @@ public class MenuActivity extends AppCompatActivity implements IActivity{
 
     @Override
     public void settingsAttributes() {
-        
     }
 
     @Override
     public void settingsView() {
+        logoImageView = (ImageView) findViewById(R.id.logoImageView);
+
+        categoriesFragment = (CategoriesFragment) getSupportFragmentManager().findFragmentById(R.id.categoriesFragment);
+
         rootDrawerLayout = (DrawerLayout)findViewById(R.id.rootDrawerLayout);
         rootMenuRelativeLayout = (RelativeLayout) findViewById(R.id.rootMenuRelativeLayout);
 
@@ -50,9 +60,19 @@ public class MenuActivity extends AppCompatActivity implements IActivity{
 
         menuListView = (ListView) findViewById(R.id.menuListView);
         menuListView.setAdapter(new ArrayAdapter<String>(this, R.layout.adapter_menu_list, getResources().getStringArray(R.array.menu_array)));
+        menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                settingsMenuVisibility(position);
+
+                rootDrawerLayout.closeDrawer(rootMenuRelativeLayout);
+            }
+        });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        settingsMenuVisibility(-1);
     }
 
     @Override
@@ -76,5 +96,19 @@ public class MenuActivity extends AppCompatActivity implements IActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void settingsMenuVisibility(int itemPosition) {
+        switch (itemPosition){
+            case 0:
+                logoImageView.setVisibility(View.GONE);
+                categoriesFragment.getView().setVisibility(View.VISIBLE);
+                break;
+
+            default:
+                logoImageView.setVisibility(View.VISIBLE);
+                categoriesFragment.getView().setVisibility(View.GONE);
+                break;
+        }
     }
 }

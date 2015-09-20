@@ -7,14 +7,30 @@ package com.mviniciuspimenta.marketshoppinglist.model;
  */
 public class Store {
 
+    public static final String TABLE_NAME = "store";
+    public static final String COLUMN_ID = "id_store";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_LAT = "latitude";
+    public static final String COLUMN_LONG = "longitude";
+
+    private int id;
     private String name;
-    private Double lat;
+    private Double latitude;
     private Double longitude;
 
-    public Store(String name, Double lat, Double longitude) {
+    public Store(int id, String name, Double latitude, Double longitude) {
+        this.id = id;
         this.name = name;
-        this.lat = lat;
+        this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -25,12 +41,12 @@ public class Store {
         this.name = name;
     }
 
-    public Double getLat() {
-        return lat;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setLat(Double lat) {
-        this.lat = lat;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public Double getLongitude() {
